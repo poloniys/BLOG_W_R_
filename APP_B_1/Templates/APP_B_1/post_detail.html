@@ -1,0 +1,76 @@
+{% extends "APP_B_1/padre.html"%}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 left  top">
+      <div class="card-body">
+        <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
+        <p class="card-text text-muted h6"> Creado Por: {{ post.author }},  {{ post.created_on}}. Actualizado: {{ post.updated_on}} </p>
+        <p class="card-text ">{{ post.content | safe }}</p>
+        {% if request.user == post.author %}
+    <a href="{% url 'editar_post' post.slug  %}" class="w3-button w3-round-large w3-large w3-indigo w3-right"><i class="fa fa-edit"></i> Editar</a>
+    <a href="{% url 'eliminar_post' post.slug  %}" class="w3-button w3-round-large w3-large w3-indigo w3-right"><i class="fa fa-edit"></i> Eliminar</a>
+
+    {% endif %}
+        {% if post.image %}
+        <div class="w3-center w3-display-container w3-card-4">
+            <img src="{{post.image.url}}"  class="w3-border w3-padding" height="500px" alt="Pet-Post">
+        </div>
+
+{% else %}
+        <div class="w3-center w3-display-container w3-card-4">
+            <i class="fa fa-image w3-jumbo"></i>
+            <p><b>{{post.author}}</b> aún no ha añadido ninguna imagen para el post.<br>(Puedes enviarle un mensaje para darle alguna idea :))</p>
+        </div>
+{% endif %}      </div>
+    </div>
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <div class="card-body">
+        <!-- comments -->
+        <h2>{{ comments.count }} comments</h2>
+
+        {% for comment in comments %}
+        <div class="comments" style="padding: 10px;">
+          <p class="font-weight-bold">
+            
+            {{ comment.name }}
+            <span class=" text-muted font-weight-normal">
+              {{ comment.created_on }}
+            </span>
+          </p>
+          {{ comment.body | linebreaks }}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <div class="card-body">
+        {% if new_comment %}
+        <div class="alert alert-success" role="alert">
+          Tu comentario se ha añadido
+        </div>
+        {% else %}
+        <h3>Dejar un Comentario </h3>
+        <form method="post" style="margin-top: 1.3em;">
+          {% if user.is_authenticated %} 
+
+          {{ comment_form.as_p }}
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary  btn-lg">Enviar</button>
+        </form>
+
+        {% else %}
+        <a class="nav-link text-black font-weight-bold" href="{% url 'login' %}">Registrase para poder comentar!</a>
+
+        {% endif %}
+
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+</div>
+
+{% endblock content %}

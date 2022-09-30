@@ -1,0 +1,18 @@
+{% extends "APP_B_1/padre.html"%}
+{% block content %} 
+<h1 class='mb-5'>Buscamos chat entre usuarios</h1>
+{% load static %}
+
+
+<h1>Chat</h1>
+<form action="{% url 'buscar' %}" method="GET" enctype="multipart/form-data"> {% csrf_token %} 
+
+<p>Usuario: </p><input type="text", name="usuario", id="usuario">
+
+<input type="submit", value="Ver chat">
+
+</form>
+
+<h2>{{ comentario }}</h2>
+
+{% endblock %}

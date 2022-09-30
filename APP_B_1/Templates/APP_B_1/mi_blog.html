@@ -1,0 +1,97 @@
+{% extends "APP_B_1/padre.html"%}
+{% block content %} 
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        background-color: #fdfdfd;
+    }
+
+    .head_text {
+        color: white;
+    }
+
+    .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+    }
+</style>
+
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    
+                    <h3 class=" site-heading my-4 mt-3 text-white">Blog de {{mensaje}} </h3> 
+
+               
+                        <a href="{% url 'perfil' %}"  class="btn btn-danger">Accede a tu Perfil!</a>
+
+                        
+                        <a href="{% url 'inbox' %}"  class="btn btn-warning">Accede a Mensajeria!</a>
+
+                    <p class="text-light">Algun eventual texto </p>
+
+
+                </div>
+
+            </div>               
+
+        </div>
+
+    </div>
+
+</header>
+ <!-- BLOCK SIDBAR Goes here -->
+ <style>
+    .card{
+        box-shadow: 0 16px 48px #E3E7EB;
+    }
+
+</style>
+
+<!-- Sidebar Widgets Column -->
+<div class="col-md-4 float-right ">
+<div class="card my-4">
+    <h5 class="card-header">Una sidebar</h5>
+<div class="card-body">
+    <p class="card-text"> Creá Tu blog! Es divertido que compartas contenido con nostros!</p>
+    <a href="{% url 'crear_post' %}"  class="btn btn-danger">Crear Nuevo Post!</a>
+</div>
+</div>
+</div>
+
+<!-- END BLOCK SIDBAR  -->
+
+
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8 mt-3 left">
+            {% for post in post_list %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <h4 class="card-title">{{ post.subtitle }}</h4>
+                    <p class="card-text text-muted h6"> Creado Por: {{ post.author }},  {{ post.created_on}}. Actualizado: {{ post.updated_on}} </p>
+                    <p class="card-text">{{post.content|safe |slice:":400" }}</p>
+
+                    <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Leer Mas &rarr;</a>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% block sidbar %}
+        <!-- Content Goes here -->
+        {% endblock  %}
+</div>
+</div>
+
+
+
+
+
+{% endblock %}

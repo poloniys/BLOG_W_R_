@@ -1,0 +1,21 @@
+{% extends "APP_B_1/padre.html"%}
+{% block content %} 
+<h1 class='mb-5'>Mensajes </h1>
+{% load static %}
+
+<h1>Mande un mensaje cualquiera</h1>
+<form action="{% url 'inbox' %}" method="POST"> {% csrf_token %} 
+<table>
+    {{ formulario.as_table }}
+
+</table>
+
+<input type="submit", value="Enviar">
+
+</form>
+
+<h2>{{ comentario }}</h2>
+<a href="{% url 'leerMensajes' %}"  class="btn btn-danger">Ver Mensajes Enviados</a>
+<a href="{% url 'busquedaUsuario' %}"  class="btn btn-warning">Ver Chats</a>
+
+{% endblock %}

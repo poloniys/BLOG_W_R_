@@ -1,0 +1,36 @@
+{% extends "APP_B_1/padre.html"%}
+{% block content %} 
+
+
+
+<div class="w3-panel w3-padding-16 w3-center w3-topbar w3-bottombar w3-border-indigo w3-round">
+    <h1>{{title}}</h1>
+</div>
+
+<!-- Form -->
+{% if form.errors  %}
+    <h5 style="color: red">Hubo un problema con los datos.</h5>
+{% endif %}
+
+<!-- Formulario nuevo post -->
+
+<!-- IMPORTANTE: Para guardar imagenes el formulario debe tener un enctype="multipart/form-data", caso contrario
+no lo guarda (diccionario vacio
+Note that FILES will only contain data if the request method was POST 
+and the that posted to the request had enctype="multipart/form-data". 
+Otherwise, FILES will be a blank dictionary-like object.) -->
+
+<form enctype="multipart/form-data" action="{% url 'crear_post' %}" method="POST">
+    {% csrf_token %}
+
+    <table class="w3-table w3-topbar w3-bottombar w3-border-indigo w3-round">
+    {{form.as_table}}
+    </table>
+    <!-- Botones -->
+    <div class="w3-bar w3-padding-32">
+        <input button type="submit" class="w3-button w3-round-large w3-button w3-large w3-indigo" value="Crear Post">
+        <a button type="button" class="w3-button w3-round-large w3-button w3-large w3-indigo" href=" {% url 'posts' %} ">Volver</button></a>
+    </div>
+</form>
+
+{% endblock  %}

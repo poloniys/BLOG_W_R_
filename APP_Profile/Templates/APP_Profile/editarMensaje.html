@@ -1,0 +1,19 @@
+{% extends "APP_B_1/padre.html"%}
+{% block content %} 
+<h1 class='mb-5'>Editando Mensajes </h1>
+{% load static %}
+
+<h1>Edite el mensaje enviado a: {{ mensaje_enviado }} </h1>
+<form action="{% url 'editarMensaje' id %}" method="POST"> {% csrf_token %} 
+<table>
+    {{ formulario.as_table }}
+
+</table>
+
+<input type="submit", value="Enviar nuevamente">
+
+</form>
+
+<h2>{{ comentario }}</h2>
+<a href="{% url 'leerMensajes' %}"  class="btn btn-danger">Ver Mensajes Enviados</a>
+{% endblock %}

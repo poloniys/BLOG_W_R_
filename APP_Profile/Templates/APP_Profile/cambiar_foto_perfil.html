@@ -1,0 +1,14 @@
+{% extends "APP_B_1/padre.html"%}
+{% block content %} 
+{% load static %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Save" class="w3-button w3-round-large w3-button w3-large w3-indigo w3-margin-bottom">
+</form>
+
+<a button type="button" class="w3-button w3-round-large w3-button w3-large w3-indigo w3-margin-top" href=" {% url 'perfil' %} ">Volver</button></a>
+
+
+{% endblock %}

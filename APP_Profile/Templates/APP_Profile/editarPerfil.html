@@ -1,0 +1,39 @@
+{% extends "APP_B_1/padre.html"%}
+{% block content %} 
+{% load static %}
+{% if user.is_superuser %}
+<div div class="w3-container w3-card-4">
+    <p>Para modificar su avatar ingrese aqui <a class="w3-button w3-black w3-border" href="{% url 'editarPerfil' %}"><i class="fa fa-file-image-o"></i></a></p>
+</div>
+{% endif %}
+
+<!-- Username to display -->
+<div class="w3-card w3-indigo w3-round-xlarge">
+    <h2 class="w3-center"><b>{{ usuario.username }}</b></h2>
+</div>
+
+<!-- Form -->
+{% if form.errors  %}
+<h5 style="color: red">Hubo un problema con los datos.</h5>
+{% endif %}
+
+<!-- Formulario data usuario -->
+<div>
+    <form action="" method="post">
+        {% csrf_token %}
+        
+        <table class="w3-table w3-topbar w3-bottombar w3-border-indigo w3-round">
+            {{form.as_table}}
+        </table>
+        
+        <!-- Botones -->
+        <div class="w3-bar w3-padding-32">
+            <input button type="submit" class="w3-button w3-round-large w3-button w3-large w3-indigo" value="Guardar cambios">
+            <a button type="button" class="w3-button w3-round-large w3-button w3-large w3-indigo" href=" {% url 'perfil' %} ">Cancelar</button></a>
+        </div>
+    </form>
+</div>
+
+
+
+{% endblock %}

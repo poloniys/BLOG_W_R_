@@ -1,0 +1,20 @@
+{% extends "APP_B_1/padre.html"%}
+
+{% block content %}
+{{mensaje}}
+
+{% if form.errors %}
+<p style="color: red;"> Están mal los datos, revisar </p>
+{% endif %} 
+
+    <form action=""method='POST'> 
+        
+            {% csrf_token %}
+
+            {{form.as_p }}
+
+    
+        <button type="submit"> Registrarse </button>
+
+    </form>
+{%endblock%}

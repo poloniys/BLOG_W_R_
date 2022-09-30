@@ -1,0 +1,60 @@
+{% extends "APP_B_1/padre.html"%}
+{% block content %}
+
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        background-color: #fdfdfd;
+    }
+
+    .head_text {
+        color: white;
+    }
+
+    .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+    }
+</style>
+
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h3 class=" site-heading my-4 mt-3 text-white"> Sobre Nosotros </h3>
+                    <h4 class="text-light">Somos estudiantes del curso Python de Coder House, comisión 31100 
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<p class="text-black">
+<h3>Yamil: Persona amable y amante de lo animales, quiere vivir lo mas cerca del campo.</h3>
+<h3>Tomás: Aficionado a las criptomonedas, espera hacerse independiente económicamente para lograr sus sueños.</h3>
+<h3>Wilfredo: Amante del deporte, su sueño es triunfar como beisbolista algún día.</h3>
+</p>
+
+{%endblock%}
+
+{% block sidebar %} 
+      
+   
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h3 class=" site-heading my-4 mt-3 text-white"> Sobre Nosotros </h3>
+                    <p class="text-light">Somos estudiantes del curso Python de Coder House, comisión 31100 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>  
+
+{% endblock sidebar %}

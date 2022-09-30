@@ -1,0 +1,36 @@
+   
+
+{% extends "APP_B_1/padre.html"%}
+{% block content %} 
+<h1 class='mb-5'>Mensajes</h1>
+{% load static %}
+
+
+
+{% if comentario %}
+<h3>{{ comentario }}</h3>
+
+{% else %}
+<h1>Mensajes Enviados</h1>
+
+{% for mensa in mensajes %}
+
+<li style="color:red ;">{{ mensa.usuario }}</li>
+
+<li>{{ mensa.texto }}</li>
+
+---------------------------------
+<button>
+    <a href="{% url 'eliminarMensaje' mensa.id %}"  class="btn btn-danger"> Me equivoque, lo voy a borrar </a>
+    <a href="{% url 'editarMensaje' mensa.id %}"  class="btn btn-danger"> Me dieron ganas de cambiar lo que mande</a>
+    <a href="{% url 'busquedaUsuario' %}"  class="btn btn-primary"> Ver chat</a>
+</button>
+{% endfor %}
+
+{% endif %}
+
+<a href="{% url 'inbox' %}"  class="btn btn-warning"> Mandar otro mensaje</a>
+
+
+{% endblock %}
+

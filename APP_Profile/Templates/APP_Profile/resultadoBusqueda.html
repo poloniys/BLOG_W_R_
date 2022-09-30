@@ -1,0 +1,30 @@
+{% extends "APP_B_1/padre.html"%}
+{% block content %} 
+<h1 class='mb-5'>Buscamos mensajes por usuarios</h1>
+{% load static %}
+
+
+
+{% if comentario %}
+<h3>{{ comentario }}</h3>
+
+{% else %}
+<h1>Mensajes Enviados</h1>
+
+{% for mensajes in mensaje %}
+
+
+<h2 style="color:red ;">Mensaje enviado a: {{ mensajes.usuario }}</h2>
+<h2></h2>
+
+<h8>{{ mensajes.texto }}</h8>
+
+---------------------------------
+{% endfor %}
+
+{% endif %}
+
+
+
+
+{% endblock %}

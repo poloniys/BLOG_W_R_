@@ -1,0 +1,19 @@
+{% extends "APP_B_1/padre.html"%}
+{% block content %}
+<h1 class="mb-5">Login</h1>
+
+{{mensaje}}
+
+{% if form.errors %}
+<p style="color: red;"> Están mal los datos, revisar </p>
+{% endif %} 
+
+    <form action=""method='POST'> {% csrf_token %}
+   
+            {{form.as_p }}
+
+    
+        <button type="submit"> Iniciar Sesión</button>
+
+    </form>
+{%endblock%}
