@@ -18,7 +18,7 @@ class Avatar(models.Model):
 
 class Mensajes(models.Model):
     
-    usuario=models.CharField(max_length=50, null=True)
+    #usuario=models.ForeignKey(User, on_delete=models.CASCADE,related_name='usuario')
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender")
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="receiver")
     texto=models.TextField()

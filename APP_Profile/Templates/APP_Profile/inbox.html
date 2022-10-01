@@ -3,19 +3,70 @@
 <h1 class='mb-5'>Mensajes </h1>
 {% load static %}
 
-<h1>Mande un mensaje cualquiera</h1>
-<form action="{% url 'inbox' %}" method="POST"> {% csrf_token %} 
-<table>
-    {{ formulario.as_table }}
+<div class="w3-container w3-card-4 w3-margin-top w3-text-indigo">
+    <h3>{{title}}</h3>
+</div>
 
-</table>
+<!--  Table Inbox -->
 
-<input type="submit", value="Enviar">
+<!-- Received messages -->
+<div class="w3-container w3-padding-16">
+    <h3 class="w3-monospace w3-indigo">Bandeja de entrada</h3>
+    <table class="w3-table-all w3-card-4">
+        <thead>
+            <tr class="w3-wide">
+                <th>De:</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for msg in received %}
+                <tr>
+                    <th>{{msg.sender}}</th>
+        
+                    <td>{{msg.texto}}
+                    <td>{{msg.sent_at}}</td>
+                    <td>
+                        <!-- Botones de tabla -->
+                        <a href="{% url 'eliminarMensaje' msg.id %}" class="w3-button w3-round w3-indigo w3-small"><i class="fa fa-trash"></i> Borrar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>    
 
-</form>
+<!-- Sent messages -->
+<div class="w3-container w3-padding-16">
+    <h3 class="w3-monospace w3-indigo">Bandeja de salida</h3>
+    <table class="w3-table-all w3-card-4">
+        <thead>
+            <tr class="w3-wide">
+                <th>Para:</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for msg in sent %}
+                <tr>
+                    <th>{{msg.receiver}}</th>
+        
+                    <td>{{msg.texto}}
+                    <td>{{msg.sent_at}}</td>
+                    <td>
+                        <!-- Botones de tabla -->
+                        <a href="{% url 'eliminarMensaje' msg.id %}" class="w3-button w3-round w3-indigo w3-small"><i class="fa fa-trash"></i> Borrar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>    
 
-<h2>{{ comentario }}</h2>
-<a href="{% url 'leerMensajes' %}"  class="btn btn-danger">Ver Mensajes Enviados</a>
-<a href="{% url 'busquedaUsuario' %}"  class="btn btn-warning">Ver Chats</a>
+<!-- Buttons -->
+<div class="w3-bar w3-padding-32 w3-center">
+    <a button type="button" class="w3-button w3-round-large w3-button w3-large w3-indigo" href=" {% url 'mensaje_nuevo' %} ">Nuevo</button></a>
+    <a button type="button" class="w3-button w3-round-large w3-button w3-large w3-indigo" href=" {% url 'inbox' %} ">Volver</button></a>
+</div>
 
 {% endblock %}

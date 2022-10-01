@@ -5,10 +5,12 @@
 {{mensaje}}
 
 {% if form.errors %}
-<p style="color: red;"> Están mal los datos, revisar </p>
+<h4 style="color: red;"> Están mal los datos, revisar </h4>
+<a button type="button" class="w3-button w3-round-large w3-button w3-large w3-indigo" href=" {% url 'login' %} ">Volver</button></a>
+
 {% endif %} 
 
-    <form action=""method='POST'> {% csrf_token %}
+    <form action="{% url 'login' %}" method='POST'> {% csrf_token %}
    
             {{form.as_p }}
 

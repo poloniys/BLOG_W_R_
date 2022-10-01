@@ -36,15 +36,11 @@
 
 <h5 class="text-black">Estos son tus datos: </h5>
 
-    {% if user.is_superuser %}
-    <div class="w3-card-4 w3-center w3-black w3-display-container">
-        <img class="w3-circle" height="400px" src="{% static 'APP_Profile/avatars/empty_avatar.png' %}" alt="avatar">
-    </div>
-    {% else %}
+ 
     <div class="w3-card-4 w3-center w3-black w3-display-container">
         <img src="{{avatar}}" class="w3-circle" height="400px" alt="avatar">
     </div>
-    {% endif %}
+   
 
 <!-- Listado de datos usuario -->
 
@@ -71,7 +67,9 @@
 <a button type="button" class="btn btn-primary" href="{% url 'cambiar_foto_perfil' %}">Cambiar Foto de Perfil</button></a>
 
 </div>
- 
+<br>
+<a button type="button" class="btn btn-warning" href=" {% url 'mi_blog' %} ">Volver</button></a>
+
         {% block sidbar %}
         <!-- Content Goes here -->
 

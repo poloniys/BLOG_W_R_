@@ -1,0 +1,29 @@
+{% extends "APP_B_1/padre.html"%}
+{% block content %} 
+<h1 class='mb-5'>Mensajes</h1>
+{% load static %}
+<div class="w3-container w3-card-4">
+    <h3>{{title}}</h3>
+</div>
+
+{% if form.errors  %}
+<h5 style="color: red">Hubo un problema con los datos.</h5>
+{% endif %}
+
+<!-- Formulario nuevo mensage -->
+<div class="w3-container w3-padding-16">
+    <form action="{% url 'mensaje_nuevo' %}" method="POST">
+        {% csrf_token %}
+        <table class="w3-table-all w3-card-4">
+            {{form.as_table}}
+        </table>
+        
+        <!-- Botones -->
+        <div class="w3-bar w3-padding-32">
+            <input button type="submit" class="w3-bar-item  w3-right w3-button w3-white w3-border w3-border-indigo w3-round-large" value="Send">
+            <a button type="button" class="w3-button w3-white w3-border w3-border-indigo w3-round-large" href=" {% url 'inbox' %} ">Volver</button></a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

@@ -18,12 +18,24 @@ import os
 #Se desarrollan las funcioens para url
 
 def Home_V(request):
-    contexto={'home_im':"media/post_images/pet_1.png"}    
+    try:
+        avatar = Avatar.objects.get(user=request.user.id)
+        avatar = avatar.avatar.url
+    except:
+        avatar = ''
+
+    contexto={'home_im':"media/post_images/pet_1.png",'avatar':avatar}    
 
     return render(request,'APP_B_1/home.html', contexto )
 
 def Posts_V(request):
-    
+    try:
+        avatar = Avatar.objects.get(user=request.user.id)
+        avatar = avatar.avatar.url
+    except:
+        avatar = ''
+
+
     post_list =  Post.objects.filter(status=1).order_by('-created_on')
 
     paginator = Paginator(post_list, 5)  # 5 post por pagina
@@ -38,15 +50,22 @@ def Posts_V(request):
         post_list = paginator.page(paginator.num_pages)
 
 
-    return render(request,'APP_B_1/posts.html',{'post_list':post_list,'page': page} )
+    return render(request,'APP_B_1/posts.html',{'post_list':post_list,'page': page,'avatar':avatar} )
 
 
 
 def post_detail(request, slug):
+    try:
+        avatar = Avatar.objects.get(user=request.user.id)
+        avatar = avatar.avatar.url
+    except:
+        avatar = ''
+
     post = Post.objects.get(slug=slug)
     comments = post.comments.filter(active=True)
     new_comment =None
     user_commenting=request.user
+
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -58,10 +77,12 @@ def post_detail(request, slug):
             new_comment.name= user_commenting
             # Save the comment to the database
             new_comment.save()
+
+           
     else:
         comment_form = CommentForm()
 
-    return render(request, 'APP_B_1/post_detail.html', {'post': post,
+    return render(request, 'APP_B_1/post_detail.html', {'avatar':avatar,'post': post,
                                            'comments': comments,
                                            'new_comment': new_comment,
                                            'comment_form': comment_form
@@ -75,6 +96,7 @@ def Log_In_V(request):
         form = AuthenticationForm(request, data = request.POST)
 
         if form.is_valid():
+
             usuario = form.cleaned_data.get('username')
             contra = form.cleaned_data.get('password')
 
@@ -90,10 +112,10 @@ def Log_In_V(request):
 
             else:
 
-                return render(request,"APP_B_1/login.html",{"mensaje":"Error, datos incorrectos"})
+                return render(request,"APP_B_1/login.html",{"mensaje":"Error, datos incorrectos:",'form':form})
 
         else:
-                return render(request,"APP_B_1/login.html",{"mensaje":"Error, formulario erroneo"})
+                return render(request,"APP_B_1/login.html",{"mensaje":"Error, formulario erroneo:",'form':form})
 
     form = AuthenticationForm()
 
@@ -123,13 +145,26 @@ def Registro_V(request):
 
 @login_required
 def Mi_Blog_V(request):
+    try:
+        avatar = Avatar.objects.get(user=request.user.id)
+        avatar = avatar.avatar.url
+    except:
+        avatar = ''
+
     usuario=  request.user
     post_list =  Post.objects.filter(status=1,author=usuario).order_by('-created_on')
 
-    return render(request,'APP_B_1/mi_blog.html',{'post_list':post_list,"mensaje":f" {usuario}", "avatar":obtenerAvatar(request)} )
+    return render(request,'APP_B_1/mi_blog.html',{'post_list':post_list,"mensaje":f" {usuario}", "avatar":avatar} )
 
 def About_V(request):
-    return render(request,'APP_B_1/about.html')
+    try:
+        avatar = Avatar.objects.get(user=request.user.id)
+        avatar = avatar.avatar.url
+    except:
+        avatar = ''
+
+
+    return render(request,'APP_B_1/about.html',{'avatar':avatar})
 
 
 @login_required

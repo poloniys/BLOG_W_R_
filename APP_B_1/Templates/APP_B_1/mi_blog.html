@@ -26,7 +26,7 @@
                     <h3 class=" site-heading my-4 mt-3 text-white">Blog de {{mensaje}} </h3> 
 
                
-                        <a href="{% url 'perfil' %}"  class="btn btn-danger">Accede a tu Perfil!</a>
+                        <a href="{% url 'perfil' user.id %}"  class="btn btn-danger">Accede a tu Perfil!</a>
 
                         
                         <a href="{% url 'inbox' %}"  class="btn btn-warning">Accede a Mensajeria!</a>

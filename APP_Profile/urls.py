@@ -14,10 +14,13 @@ urlpatterns = [
     path('editarPerfil', editarPerfil, name='editarPerfil'),
     path('cambiar_foto_perfil', Cambiar_foto_perfil_V, name='cambiar_foto_perfil'),
     path('inbox/', inbox, name='inbox'),
-    path('busquedaUsuario/', busquedaUsuario, name='busquedaUsuario'),
-    path('buscar/', buscar ,name='buscar' ),
-    path('leerMensajes/', leerMensajes ,name='leerMensajes' ),
+    #path('busquedaUsuario/', buscar, name='busquedaUsuario'),
+    #path('buscar/', buscar ,name='buscar' ),
+   # path('leerMensajes/', leerMensajes ,name='leerMensajes' ),
     path('eliminarMensaje/<id>', eliminarMensaje ,name='eliminarMensaje' ),
-    path('editarMensaje/<id>', editarMensaje ,name='editarMensaje' ),
+    #path('editarMensaje/<id>', editarMensaje ,name='editarMensaje' ),
+    path('mensaje_nuevo', mensaje_nuevo_V ,name='mensaje_nuevo' ),
+    path('mostrar_otros_perfil', Mostrar_O_Perfil_V ,name='mostrar_otros_perfil' ),
+
 
 ]

@@ -29,6 +29,8 @@
             </div>
         </div>
     </div>
+
+
 </header>
 <div class="container">
     <div class="row">
@@ -47,10 +49,18 @@
             {% endfor %}
         </div>
 
-        {% block sidbar %}
-        <!-- Content Goes here -->
-        {% endblock  %}
-
+<!-- Sidebar Widgets Column -->
+<div class="col-md-4 float-right ">
+    <div class="card my-4">
+        <h5 class="card-header">Una sidebar</h5>
+    <div class="card-body">
+        <p class="card-text"> Mirá el perfil de alguien que te interese sus post! Hacelo ingresando su nombre de usuario</p>
+        <a href="{% url 'mostrar_otros_perfil' %}"  class="btn btn-danger">Buscar perfil!</a>
+    </div>
+    </div>
+    </div>
+    
+    <!-- END BLOCK SIDBAR  -->
         
 </div>
 

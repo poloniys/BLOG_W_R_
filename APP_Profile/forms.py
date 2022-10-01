@@ -1,11 +1,12 @@
 """Forms for users app. Register new user; update profiles; messages."""
 
+from email.message import Message
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 # My models
-from APP_Profile.models import Avatar
+from APP_Profile.models import Avatar, Mensajes
 
 # Forms
 
@@ -42,12 +43,25 @@ class UpdateProfileForm(UserCreationForm):
             'descripcion',
         ]
 
-class MensajesFormulario(forms.Form):
-    usuario=forms.CharField(max_length=50)
-    texto=forms.CharField(max_length=1000)
+#class MensajesFormulario(forms.Form):
+#    usuario=forms.CharField(max_length=50)
+#    texto=forms.CharField(max_length=1000)
 
+#    class Meta:
+#        model = Mensajes
+
+
+class MensajesFormulario(forms.ModelForm):
+    """DM's form"""
+    
     class Meta:
-        model = User
+        model = Mensajes  # Modelo del cual importa
+        fields = [
+            'receiver',
+            'texto',
+        ]
+        #  Widget para agrandar el area de texto(TextField) a 80 columnas
+        widgets = {'texto': forms.Textarea(attrs={'cols': 80})}
 
 class UserEditForm(UserCreationForm):
     username = forms.CharField(label='Modificar Usuario')
@@ -75,3 +89,13 @@ class UserEditForm(UserCreationForm):
 
 
 
+
+class Busq_Us_Form(forms.ModelForm):
+    """DM's form"""
+    
+    class Meta:
+        model = Mensajes  # Modelo del cual importa
+        fields = [
+            'receiver',          
+        ]
+      
